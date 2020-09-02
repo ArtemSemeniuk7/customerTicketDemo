@@ -18,7 +18,7 @@ import java.util.stream.StreamSupport;
 public class DateComparing {
     @Autowired
     private RequestRepository requestRepository;
-    static ReentrantLock lock = new ReentrantLock();
+    private static ReentrantLock lock = new ReentrantLock();
     public List<RequestTable> findFutureRequests(Long clientId) {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date currentDate = new Date(System.currentTimeMillis());

@@ -6,6 +6,9 @@ import net.customer.model.RequestTable;
 import net.customer.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -20,18 +23,19 @@ public class CronJob {
     private static AtomicBoolean isRequstsNotFinite = new AtomicBoolean(true);
 
     @Async
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 60000)
     public void scheduleTaskAsync() {
         log.info("Cron job task began");
 
         Long id = getUnfiniteStatusId();
 
         if (isRequstsNotFinite.get()) {
+            HttpEntity<HttpStatus> httpEntity = new HttpEntity<>(new HttpHeaders());
             new RestTemplateBuilder()
                     .errorHandler(new CustomExceptionHandler())
                     .build()
-                    .getForEntity("http://localhost:8080/request/check/" +
-                            id, HttpStatus.class);
+                    .exchange ("http://localhost:8080/request/check/" +
+                            id, HttpMethod.PUT, httpEntity, Void.class);
             log.info("Cron job task ended");
         }
     }

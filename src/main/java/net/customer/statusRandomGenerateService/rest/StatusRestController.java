@@ -1,7 +1,7 @@
-package net.customer.statusGenerateService.rest;
+package net.customer.statusRandomGenerateService.rest;
 
 import io.swagger.annotations.Api;
-import net.customer.statusGenerateService.statusRandomGenerator.StatusGenerator;
+import net.customer.statusRandomGenerateService.statusRandomGenerator.StatusGenerator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +17,6 @@ public class StatusRestController {
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<HttpStatus> saveRequest() {
         HttpStatus httpStatus = StatusGenerator.genetateStatus();
-        return new ResponseEntity<>(httpStatus, httpStatus);
+        return new ResponseEntity<>(httpStatus, HttpStatus.OK);
     }
 }

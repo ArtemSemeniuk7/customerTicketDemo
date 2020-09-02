@@ -7,10 +7,7 @@ import net.customer.exceptionHandler.CustomExceptionHandler;
 import net.customer.statusCheckingService.dao.Dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 @Api(value = "checking the request status")
@@ -19,11 +16,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/request/check/")
 public class RequestIdRestController {
     @Autowired
-    Dao daoObject;
+    private Dao daoObject;
 
     @ApiOperation(value = "checking the request status by request id", response = HttpStatus.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    @RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<HttpStatus> saveRequest(@PathVariable("id") Long requestId) {
         if (requestId == null) {
             log.info("request Id is null");
@@ -51,17 +48,10 @@ public class RequestIdRestController {
                 new RestTemplateBuilder()
                         .errorHandler(new CustomExceptionHandler())
                         .build()
-                        .getForEntity("http://localhost:8080/status", HttpStatus.class);
+                        .getForEntity("http://localhost:8080/status",  HttpStatus.class);
 
         daoObject.saveStatus(responseEntity.getBody(), requestId);
 
         return new ResponseEntity<>(responseEntity.getBody(), responseEntity.getBody());
     }
-    /*
-    @ExceptionHandler({HttpClientErrorException.class})
-    public ResponseEntity<HttpStatus> handleHttpClientErrorException(Exception e, WebRequest request) {
-        requestTable.setRequestStatus(HttpStatus.NOT_FOUND.value());
-        requestRepository.save(requestTable);
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND, HttpStatus.NOT_FOUND);
-    } */
 }

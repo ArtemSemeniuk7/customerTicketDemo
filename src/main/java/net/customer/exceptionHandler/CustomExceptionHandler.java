@@ -14,7 +14,8 @@ public class CustomExceptionHandler implements ResponseErrorHandler {
             throws IOException {
         return (
                 httpResponse.getStatusCode() == HttpStatus.NOT_FOUND
-                        || httpResponse.getStatusCode() == HttpStatus.BAD_REQUEST);
+                        || httpResponse.getStatusCode() == HttpStatus.BAD_REQUEST
+                        || httpResponse.getStatusCode() == HttpStatus.TEMPORARY_REDIRECT);
     }
 
     @Override
@@ -26,6 +27,9 @@ public class CustomExceptionHandler implements ResponseErrorHandler {
         } else if (httpResponse.getStatusCode() == HttpStatus.BAD_REQUEST) {
             log.info("Exception 400 handled");
             return;
-        }
+         } else if (httpResponse.getStatusCode() == HttpStatus.TEMPORARY_REDIRECT) {
+            log.info("Exception 307 handled");
+            return;
+         }
     }
 }

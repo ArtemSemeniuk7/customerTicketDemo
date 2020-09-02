@@ -1,7 +1,6 @@
-package net.customer.statusGenerateService.statusRandomGenerator;
+package net.customer.statusRandomGenerateService.statusRandomGenerator;
 
 import org.springframework.http.HttpStatus;
-
 import java.util.Random;
 
 public class StatusGenerator {

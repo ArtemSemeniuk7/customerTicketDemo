@@ -52,7 +52,8 @@ public class RequestRestController {
 
     @ApiOperation(value = "get future request list for concrete client", response = List.class)
     @RequestMapping(value = "/get-future-data/{clientId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<List<RequestTable>> saveRequest(@PathVariable Long clientId) {
+    public ResponseEntity<List<RequestTable>> getFutureRequests(@PathVariable Long clientId) {
+
           List<RequestTable> futureRequestsList = dateComparing.findFutureRequests(clientId);
 
           if (futureRequestsList.isEmpty()) {
