@@ -18,7 +18,7 @@
 
 
 
-POST метод RequestRestController для сохранения заявки в базу данных
+POST метод RequestRestController для сохранения заявки в базу данных. На вход принимает JSON, на выход отдает id заявки.
 
 
 
@@ -35,7 +35,7 @@ POST метод RequestRestController для сохранения заявки �
 }
 
 
-GET метод RequestRestController выдает все заявки дата которых в будущем, для данного клиента, на вход принимает id клиента.
+GET метод RequestRestController выдает все заявки дата которых в будущем, для данного клиента, на вход принимает id клиента, отдает все заявки данного клиента у которых дата в будущем.
 
 
 ![alt text](https://github.com/ArtemSemeniuk7/customerTicketDemo/blob/master/request-get-future-data%7Bid%7D.png)
@@ -44,15 +44,18 @@ GET метод RequestRestController выдает все заявки дата �
 https://github.com/ArtemSemeniuk7/customerTicketDemo/blob/master/get-future-data.json
 
 
-RequestIDRestController отправляет заявки в StatusRestController, который генерирует случайную заявку. До работы CronJob.
+RequestIDRestController отправляет заявки в StatusRestController, который генерирует случайную заявку. На вход принимает id заявки, указанный в URI, на выход отдает http статус.
+
+В RequestIDRestController каждую минуту отправляет запрос CronJob, что бы провести еще раз попытку оплаты заявок со статусами 307 и 0.
+
+До работы CronJob:
 
 
 ![alt text](https://github.com/ArtemSemeniuk7/customerTicketDemo/blob/master/get-request-check-%7Bid%7D%20before%20cron%20job.png)
 
 
 
-В RequestIDRestController каждую минуту отправляет запрос CronJob, что бы провести еще раз попытку оплаты заявок с статусами 307 и 0,
-результат работы CronJob:
+Результат работы CronJob:
 
 ![alt text](https://github.com/ArtemSemeniuk7/customerTicketDemo/blob/master/get-request-check-%7Bid%7D%20after%20cron%20job.png)
 
