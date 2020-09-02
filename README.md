@@ -1,6 +1,5 @@
 # customerTicketDemo
-
-https://github.com/ArtemSemeniuk7/customerTicketDemo/blob/master/swagger.png
+![alt text](https://github.com/ArtemSemeniuk7/customerTicketDemo/blob/master/swagger.png)
 
 
 {
