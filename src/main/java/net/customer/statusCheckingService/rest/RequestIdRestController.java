@@ -21,7 +21,7 @@ public class RequestIdRestController {
     @ApiOperation(value = "checking the request status by request id", response = HttpStatus.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @RequestMapping(value = "{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<HttpStatus> saveRequest(@PathVariable("id") Long requestId) {
+    public ResponseEntity<HttpStatus> checkStatus(@PathVariable("id") Long requestId) {
         if (requestId == null) {
             log.info("request Id is null");
             HttpHeaders httpHeaders = new HttpHeaders();
