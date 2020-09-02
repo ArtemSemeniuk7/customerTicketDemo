@@ -4,10 +4,10 @@
 Для запуска проекта нужно скачать mysql драйвер и создать базу данных customer_data_base, 
 также нужно иметь свободным 8080 порт.
 
-Java 8+
-Spring Boot
-Spring Data
-RestTemplate
+Java 8+,
+Spring Boot,
+Spring Data,
+RestTemplate,
 lombok, slf4j
 
 ===================
