@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StatusRestController {
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<HttpStatus> saveRequest() {
+    public ResponseEntity<HttpStatus> getRandomStatus() {
         HttpStatus httpStatus = StatusGenerator.genetateStatus();
         return new ResponseEntity<>(httpStatus, HttpStatus.OK);
     }
